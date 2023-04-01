@@ -61,7 +61,7 @@ void FTextAssetEditorToolkit::Initialize(UTextAsset *InTextAsset, const EToolkit
 																		->SetSizeCoefficient(0.66f)
 																		->Split(
 																			FTabManager::NewStack()
-																				->AddTab(GetToolbarTabId(), ETabState::OpenedTab)
+																				->AddTab(GetToolkitFName(), ETabState::OpenedTab)
 																				->SetHideTabWell(true)
 																				->SetSizeCoefficient(0.1f)
 
@@ -102,7 +102,7 @@ void FTextAssetEditorToolkit::RegisterTabSpawners(const TSharedRef<FTabManager> 
 	InTabManager->RegisterTabSpawner(TextAssetEditor::TabId, FOnSpawnTab::CreateSP(this, &FTextAssetEditorToolkit::HandleTabManagerSpawnTab, TextAssetEditor::TabId))
 		.SetDisplayName(LOCTEXT("TextEditorTabName", "Text Editor"))
 		.SetGroup(WorkspaceMenuCategoryRef)
-		.SetIcon(FSlateIcon(FEditorStyle::GetStyleSetName(), "LevelEditor.Tabs.Viewports"));
+		.SetIcon(FSlateIcon(FAppStyle::GetAppStyleSetName(), "LevelEditor.Tabs.Viewports"));
 }
 
 void FTextAssetEditorToolkit::UnregisterTabSpawners(const TSharedRef<FTabManager> &InTabManager)
