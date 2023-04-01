@@ -35,13 +35,14 @@ void STextAssetEditor::Construct(const FArguments &InArgs, UTextAsset *InTextAss
 				   [
 
 					   SAssignNew(EditableTextBox, SMultiLineEditableTextBox)
-						   .BackgroundColor((Settings != nullptr) ? Settings->BackgroundColor : FLinearColor::White)
 						   .Font((Settings != nullptr) ? Settings->Font : FSlateFontInfo())
-						   .ForegroundColor((Settings != nullptr) ? Settings->ForegroundColor : FLinearColor::Black)
+						   .Text(TextAsset->Text)
 						   .Margin((Settings != nullptr) ? Settings->Margin : 4.0f)
 						   .OnTextChanged(this, &STextAssetEditor::HandleEditableTextBoxTextChanged)
 						   .OnTextCommitted(this, &STextAssetEditor::HandleEditableTextBoxTextCommitted)
-						   .Text(TextAsset->Text)]];
+						   //.ForegroundColor((Settings != nullptr) ? Settings->ForegroundColor : FLinearColor::Black)
+						   //.BackgroundColor((Settings != nullptr) ? Settings->BackgroundColor : FLinearColor::White)
+						   .AutoWrapText(true)]];
 
 	FCoreUObjectDelegates::OnObjectPropertyChanged.AddSP(this, &STextAssetEditor::HandleTextAssetPropertyChanged);
 }
