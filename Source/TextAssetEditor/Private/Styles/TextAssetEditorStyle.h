@@ -13,7 +13,6 @@
 #define TTF_FONT(RelativePath, ...) FSlateFontInfo(RootToContentDir(RelativePath, TEXT(".ttf")), __VA_ARGS__)
 #define OTF_FONT(RelativePath, ...) FSlateFontInfo(RootToContentDir(RelativePath, TEXT(".otf")), __VA_ARGS__)
 
-
 /**
  * Implements the visual style of the text asset editor UI.
  */
@@ -21,11 +20,10 @@ class FTextAssetEditorStyle
 	: public FSlateStyleSet
 {
 public:
-
 	/** Default constructor. */
-	 FTextAssetEditorStyle()
-		 : FSlateStyleSet("TextAssetEditorStyle")
-	 {
+	FTextAssetEditorStyle()
+		: FSlateStyleSet("TextAssetEditorStyle")
+	{
 		const FVector2D Icon16x16(16.0f, 16.0f);
 		const FVector2D Icon20x20(20.0f, 20.0f);
 		const FVector2D Icon40x40(40.0f, 40.0f);
@@ -34,18 +32,17 @@ public:
 		SetContentRoot(BaseDir / TEXT("Content"));
 
 		// set new styles here, for example...
-		//Set("TextAssetEditor.FancyButton", new IMAGE_BRUSH("icon_forward_40x", Icon40x40));
-		
+		// Set("TextAssetEditor.FancyButton", new IMAGE_BRUSH("icon_forward_40x", Icon40x40));
+
 		FSlateStyleRegistry::RegisterSlateStyle(*this);
-	 }
+	}
 
-	 /** Destructor. */
-	 ~FTextAssetEditorStyle()
-	 {
+	/** Destructor. */
+	~FTextAssetEditorStyle()
+	{
 		FSlateStyleRegistry::UnRegisterSlateStyle(*this);
-	 }
+	}
 };
-
 
 #undef IMAGE_BRUSH
 #undef BOX_BRUSH

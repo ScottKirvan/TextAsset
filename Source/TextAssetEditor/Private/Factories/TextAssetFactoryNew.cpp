@@ -4,11 +4,10 @@
 
 #include "TextAsset.h"
 
-
 /* UTextAssetFactoryNew structors
  *****************************************************************************/
 
-UTextAssetFactoryNew::UTextAssetFactoryNew(const FObjectInitializer& ObjectInitializer)
+UTextAssetFactoryNew::UTextAssetFactoryNew(const FObjectInitializer &ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	SupportedClass = UTextAsset::StaticClass();
@@ -16,15 +15,13 @@ UTextAssetFactoryNew::UTextAssetFactoryNew(const FObjectInitializer& ObjectIniti
 	bEditAfterNew = true;
 }
 
-
 /* UFactory overrides
  *****************************************************************************/
 
-UObject* UTextAssetFactoryNew::FactoryCreateNew(UClass* InClass, UObject* InParent, FName InName, EObjectFlags Flags, UObject* Context, FFeedbackContext* Warn)
+UObject *UTextAssetFactoryNew::FactoryCreateNew(UClass *InClass, UObject *InParent, FName InName, EObjectFlags Flags, UObject *Context, FFeedbackContext *Warn)
 {
 	return NewObject<UTextAsset>(InParent, InClass, InName, Flags);
 }
-
 
 bool UTextAssetFactoryNew::ShouldShowInNewMenu() const
 {

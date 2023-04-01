@@ -6,11 +6,10 @@
 #include "TextAsset.h"
 #include "Misc/FileHelper.h"
 
-
 /* UTextAssetFactory structors
  *****************************************************************************/
 
-UTextAssetFactory::UTextAssetFactory( const FObjectInitializer& ObjectInitializer )
+UTextAssetFactory::UTextAssetFactory(const FObjectInitializer &ObjectInitializer)
 	: Super(ObjectInitializer)
 {
 	Formats.Add(FString(TEXT("txt;")) + NSLOCTEXT("UTextAssetFactory", "FormatTxt", "Text File").ToString());
@@ -18,7 +17,6 @@ UTextAssetFactory::UTextAssetFactory( const FObjectInitializer& ObjectInitialize
 	bCreateNew = false;
 	bEditorImport = true;
 }
-
 
 /* UFactory overrides
  *****************************************************************************/
@@ -38,10 +36,9 @@ UObject* UTextAssetFactory::FactoryCreateBinary(UClass* Class, UObject* InParent
 	return TextAsset;
 }*/
 
-
-UObject* UTextAssetFactory::FactoryCreateFile(UClass* InClass, UObject* InParent, FName InName, EObjectFlags Flags, const FString& Filename, const TCHAR* Parms, FFeedbackContext* Warn, bool& bOutOperationCanceled)
+UObject *UTextAssetFactory::FactoryCreateFile(UClass *InClass, UObject *InParent, FName InName, EObjectFlags Flags, const FString &Filename, const TCHAR *Parms, FFeedbackContext *Warn, bool &bOutOperationCanceled)
 {
-	UTextAsset* TextAsset = nullptr;
+	UTextAsset *TextAsset = nullptr;
 	FString TextString;
 
 	if (FFileHelper::LoadFileToString(TextString, *Filename))

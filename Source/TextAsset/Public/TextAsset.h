@@ -8,20 +8,18 @@
 
 #include "TextAsset.generated.h"
 
-
 /**
  * Implements an asset that can be used to store arbitrary text, such as notes
  * or documentation.
  */
-UCLASS(BlueprintType, hidecategories=(Object))
+UCLASS(BlueprintType, hidecategories = (Object))
 class TEXTASSET_API UTextAsset
 	: public UObject
 {
 	GENERATED_BODY()
 
 public:
-
 	/** Holds the stored text. */
-	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category="TextAsset")
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "TextAsset")
 	FText Text;
 };

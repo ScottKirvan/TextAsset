@@ -12,20 +12,17 @@
 #include "Styles/TextAssetEditorStyle.h"
 #include "TextAssetEditorSettings.h"
 
-
 #define LOCTEXT_NAMESPACE "FTextAssetEditorModule"
-
 
 /**
  * Implements the TextAssetEditor module.
  */
 class FTextAssetEditorModule
-	: public IHasMenuExtensibility
-	, public IHasToolBarExtensibility
-	, public IModuleInterface
+	: public IHasMenuExtensibility,
+	  public IHasToolBarExtensibility,
+	  public IModuleInterface
 {
 public:
-
 	//~ IHasMenuExtensibility interface
 
 	virtual TSharedPtr<FExtensibilityManager> GetMenuExtensibilityManager() override
@@ -34,7 +31,6 @@ public:
 	}
 
 public:
-
 	//~ IHasToolBarExtensibility interface
 
 	virtual TSharedPtr<FExtensibilityManager> GetToolBarExtensibilityManager() override
@@ -43,14 +39,13 @@ public:
 	}
 
 public:
-
 	//~ IModuleInterface interface
 
 	virtual void StartupModule() override
 	{
 		Style = MakeShareable(new FTextAssetEditorStyle());
 
-//		FTextAssetEditorCommands::Register();
+		//		FTextAssetEditorCommands::Register();
 
 		RegisterAssetTools();
 		RegisterMenuExtensions();
@@ -70,11 +65,10 @@ public:
 	}
 
 protected:
-
 	/** Registers asset tool actions. */
 	void RegisterAssetTools()
 	{
-		IAssetTools& AssetTools = FModuleManager::LoadModuleChecked<FAssetToolsModule>("AssetTools").Get();
+		IAssetTools &AssetTools = FModuleManager::LoadModuleChecked<FAssetToolsModule>("AssetTools").Get();
 
 		RegisterAssetTypeAction(AssetTools, MakeShareable(new FTextAssetActions(Style.ToSharedRef())));
 	}
@@ -85,7 +79,7 @@ protected:
 	 * @param AssetTools The asset tools object to register with.
 	 * @param Action The asset type action to register.
 	 */
-	void RegisterAssetTypeAction(IAssetTools& AssetTools, TSharedRef<IAssetTypeActions> Action)
+	void RegisterAssetTypeAction(IAssetTools &AssetTools, TSharedRef<IAssetTypeActions> Action)
 	{
 		AssetTools.RegisterAssetTypeActions(Action);
 		RegisteredAssetTypeActions.Add(Action);
@@ -94,26 +88,25 @@ protected:
 	/** Register the text asset editor settings. */
 	void RegisterSettings()
 	{
-		ISettingsModule* SettingsModule = FModuleManager::GetModulePtr<ISettingsModule>("Settings");
+		ISettingsModule *SettingsModule = FModuleManager::GetModulePtr<ISettingsModule>("Settings");
 
 		if (SettingsModule != nullptr)
 		{
 			ISettingsSectionPtr SettingsSection = SettingsModule->RegisterSettings("Editor", "Plugins", "TextAsset",
-				LOCTEXT("TextAssetSettingsName", "Text Asset"),
-				LOCTEXT("TextAssetSettingsDescription", "Configure the Text Asset plug-in."),
-				GetMutableDefault<UTextAssetEditorSettings>()
-			);
+																				   LOCTEXT("TextAssetSettingsName", "Text Asset"),
+																				   LOCTEXT("TextAssetSettingsDescription", "Configure the Text Asset plug-in."),
+																				   GetMutableDefault<UTextAssetEditorSettings>());
 		}
 	}
 
 	/** Unregisters asset tool actions. */
 	void UnregisterAssetTools()
 	{
-		FAssetToolsModule* AssetToolsModule = FModuleManager::GetModulePtr<FAssetToolsModule>("AssetTools");
+		FAssetToolsModule *AssetToolsModule = FModuleManager::GetModulePtr<FAssetToolsModule>("AssetTools");
 
 		if (AssetToolsModule != nullptr)
 		{
-			IAssetTools& AssetTools = AssetToolsModule->Get();
+			IAssetTools &AssetTools = AssetToolsModule->Get();
 
 			for (auto Action : RegisteredAssetTypeActions)
 			{
@@ -125,7 +118,7 @@ protected:
 	/** Unregister the text asset editor settings. */
 	void UnregisterSettings()
 	{
-		ISettingsModule* SettingsModule = FModuleManager::GetModulePtr<ISettingsModule>("Settings");
+		ISettingsModule *SettingsModule = FModuleManager::GetModulePtr<ISettingsModule>("Settings");
 
 		if (SettingsModule != nullptr)
 		{
@@ -134,7 +127,6 @@ protected:
 	}
 
 protected:
-
 	/** Registers main menu and tool bar menu extensions. */
 	void RegisterMenuExtensions()
 	{
@@ -150,7 +142,6 @@ protected:
 	}
 
 private:
-
 	/** Holds the menu extensibility manager. */
 	TSharedPtr<FExtensibilityManager> MenuExtensibilityManager;
 
@@ -164,8 +155,6 @@ private:
 	TSharedPtr<FExtensibilityManager> ToolBarExtensibilityManager;
 };
 
-
 IMPLEMENT_MODULE(FTextAssetEditorModule, TextAssetEditor);
-
 
 #undef LOCTEXT_NAMESPACE
